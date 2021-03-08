@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+	<title>Document</title>
+	<style>
+	.bg-black{background-color: black;}
+	.bg-blue{background-color: blue;}
+	.bg-red{background-color: red;}
+	.bg-yellow{background-color: yellow;}
+	.box{
+		display: inline-block;
+		width: 50px;
+		height: 50px;
+		border: 1px solid black;
+	}
+	.container{
+		font-size: 12px;
+	}
+	label {
+		cursor: pointer;
+	}
+	</style>
+	<script>
+		// 검정색 체크되면 0번인덱스 색칠?
+		// 
+		$(document).ready(function() {
+			$('input[type=checkbox]').click(function() {
+				var id = $(this).attr('id');
+				console.log(id);
+				var colorIndex = $('input[type=checkbox]').index(this);
+				var boxIndex = $('.box').index(this);
+				console.log(boxIndex);
+				console.log(colorIndex);
+				$('.box').css('background-color', id + colorIndex);
+
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="divBox">
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="container">
+		<input type="checkbox" id="black"><label for="black">검정색</label><br>
+		<input type="checkbox" id="blue"><label for="blue">파란색</label><br>
+		<input type="checkbox" id="red"><label for="red">빨간색</label><br>
+		<input type="checkbox" id="yellow"><label for="yellow">노란색</label>
+	</div>
+
+	<script>
+
+	</script>
+</body>
+</html>

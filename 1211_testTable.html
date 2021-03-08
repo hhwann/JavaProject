@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var res = 0;
+
+            $('#allCheck').click(function(){
+              res = 0;
+                var chk = $(this).is(":checked");
+                if(chk){
+                    $(".form-check-input").prop('checked',true);
+                    $('.price').each(function(){
+                      var num = $(this).text();
+                      var num2 = parseInt(num);
+                      res += num2;
+                      $('.priceSum').text(res);
+                    });
+                }else{
+                    $(".form-check-input").prop('checked', false);
+                    res = 0;
+                    $('.priceSum').text(res);
+                }; 
+            }); 
+
+
+            $('.tr input[type=checkbox]').click(function(){
+              var priceNum = $(this).parents('.tr').find('.price').text();
+              var parsePriceNum = parseInt(priceNum);
+              //console.log(parsePriceNum);
+              var checked = $(this).is(":checked");
+              
+
+              if(checked){
+                res += parsePriceNum;
+              }else{
+                res -= parsePriceNum;
+              };
+              $('.priceSum').text(res);
+
+              
+              var is_check = 1;   //전체 체크상태 여부
+              $('.tr input[type=checkbox]').each(function(){
+                if($(this).is(':checked')) { //체크된 상태면 전역변수 1이다.
+               // console.log(0);
+                } else {  //체크가 하나라도 안되있는게 있으면 전역변수는 0이다.
+                is_check = 0;
+               // console.log(is_check);
+                }
+              })
+              console.log("is_check : " + is_check);
+              if(is_check == 1) {
+                console.log('다찍힘!!!');
+                $('#allCheck').prop('checked', true);
+              } else {
+                console.log('빈체크값이 있음!!!');
+                $('#allCheck').prop('checked', false);
+              }
+              
+              //3개가 체크 되면 조상의 아이디가 올체크인 체크박스의 체크를 트루로 
+              //체크가 1개라도 빠지면 조상의 아디가 올체크인 체크박스의 체크를 펄스로
+            });  //click end
+        })
+        </script>
+    <style>
+        table{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container form-check-inline">
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>
+                  <input type="checkbox" id="allCheck" class="form-check-input" value=""></th>
+                <th>메뉴</th>
+                <th>가격</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="tr">
+                <td><input type="checkbox" class="form-check-input" value=""></td>
+                <td>살치살</td>
+                <td class="price">50000</td>
+              </tr>
+              <tr class="tr">
+                <td><input type="checkbox" class="form-check-input " value=""></td>
+                <td>안창살</td>
+                <td class="price">70000</td>
+              </tr>
+              <tr class="tr">
+                <td><input type="checkbox" class="form-check-input" value=""></td>
+                <td>꽃등심</td>
+                <td class="price">35000</td>
+              </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="2">합계</td>
+                <td class="priceSum">0원</td>
+             </tr>
+            </tfoot>
+            </table>
+    </div>
+    
+</body>
+</html>
